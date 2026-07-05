@@ -379,7 +379,7 @@ const routes = {
 };
 
 function setActiveNavigation(path) {
-  document.querySelectorAll("[data-link]").forEach(link => {
+  document.querySelectorAll(".desktop-nav a[data-link], .mobile-menu a[data-link]").forEach(link => {
     if (link.origin !== location.origin) return;
     const hrefPath = new URL(link.href).pathname.replace(/\/$/, "") || "/";
     const isActive = hrefPath === path;

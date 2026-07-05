@@ -2,6 +2,14 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/trips/:slug",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/index.html"
+    },
+    {
       "source": "/((?!.*\\.).*)",
       "destination": "/index.html"
     }

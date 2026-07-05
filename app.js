@@ -378,6 +378,20 @@ const routes = {
   "/contact": renderContact
 };
 
+function setActiveNavigation(path) {
+  document.querySelectorAll("[data-link]").forEach(link => {
+    if (link.origin !== location.origin) return;
+    const hrefPath = new URL(link.href).pathname.replace(/\/$/, "") || "/";
+    const isActive = hrefPath === path;
+    link.classList.toggle("is-active", isActive);
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
 function closeMenu() {
   const menu = document.querySelector("[data-mobile-menu]");
   const button = document.querySelector("[data-menu-button]");
@@ -390,6 +404,7 @@ function render() {
   const path = location.pathname.replace(/\/$/, "") || "/";
   setMeta(routes[path] ? path : "/");
   document.querySelector("#main").innerHTML = (routes[path] || renderNotFound)();
+  setActiveNavigation(routes[path] ? path : "");
   document.querySelector("#main").focus({ preventScroll: true });
   closeMenu();
 }

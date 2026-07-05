@@ -66,7 +66,8 @@ button, input, textarea, select { font: inherit; }
   text-transform: uppercase;
 }
 .desktop-nav a, .site-footer a { color: var(--muted); }
-.desktop-nav a:hover, .site-footer a:hover { color: var(--ink); }
+.desktop-nav a:hover, .desktop-nav a.is-active, .site-footer a:hover { color: var(--ink); }
+.desktop-nav a.is-active { border-bottom: 1px solid var(--gold); }
 .nav-cta, .button {
   display: inline-flex;
   align-items: center;
@@ -137,6 +138,7 @@ button, input, textarea, select { font: inherit; }
   font-family: var(--font-serif);
   font-size: 1.8rem;
 }
+.mobile-menu nav a.is-active { color: var(--gold); }
 
 .container {
   width: min(1120px, calc(100% - 40px));

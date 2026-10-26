@@ -788,11 +788,37 @@ function closeMenu() {
   button.setAttribute("aria-expanded", "false");
 }
 
+function setupMotion() {
+  const revealItems = document.querySelectorAll(
+    "#main .section-head, #main .choice-card, #main .journey-card, #main .difference-item, #main .region-card, #main .quote, #main .step, #main .journal-card, #main .contact-band"
+  );
+  revealItems.forEach((item, index) => {
+    item.dataset.reveal = "";
+    item.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 70}ms`);
+  });
+
+  if (!("IntersectionObserver" in window)) {
+    revealItems.forEach(item => item.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px" });
+  revealItems.forEach(item => observer.observe(item));
+}
+
 function render() {
   const path = location.pathname.replace(/\/$/, "") || "/";
   const page = resolvePage(path);
   setMeta(page.metaPath);
   document.querySelector("#main").innerHTML = page.render();
+  document.documentElement.classList.add("motion-ready");
+  setupMotion();
   setActiveNavigation(page.navPath);
   document.querySelector("#main").focus({ preventScroll: true });
   closeMenu();

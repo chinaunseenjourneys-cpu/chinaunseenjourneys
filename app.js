@@ -181,25 +181,12 @@ const posts = [
     takeaways: ["Start early for atmosphere and lighter crowds.", "Stay close enough to reduce daily transfer fatigue.", "Build in weather flexibility for mist, rain and visibility."]
   },
   {
-    slug: "family-travel-china",
-    title: "Why China Works Beautifully for Family Travel",
-    excerpt: "Hands-on culture, gentle adventure and logistics that can be shaped around every generation.",
-    date: "Family Travel",
-    readTime: "4 min read",
-    body: [
-      "China works especially well for families when the route mixes big moments with hands-on experiences. A Great Wall walk, dumpling class, bamboo raft or countryside bike ride gives children something to remember beyond museum names.",
-      "Private travel also solves the real family challenge: rhythm. Some families need late starts, others need early finishes, and multi-generation groups often need hotels, meals and walking distances chosen with care.",
-      "The best family itineraries are not simplified versions of adult trips. They are designed around energy, curiosity and comfort, with enough structure to feel easy and enough flexibility to stay human."
-    ],
-    takeaways: ["Mix iconic sights with tactile activities.", "Protect downtime after transfers.", "Choose guides who can read the group's energy."]
   }
 ];
 
 const pageMeta = {
   "/": ["Private Custom China Tours | Morrow China Travel", "Private bespoke China journeys designed with China-based expertise, refined pacing and private guide support."],
   "/trips": ["Private China Tours & Journeys | Morrow China Travel", "Browse private bespoke China itineraries by region, style and travel pace."],
-  "/destinations": ["China Travel Destinations | Morrow China Travel", "Explore private travel destinations across China and see how regions pair together."],
-  "/travel-styles": ["Travel Styles | Morrow China Travel", "Family, senior, Muslim-friendly, women-only, luxury and tailor-made China travel styles."],
   "/blog": ["Travel Stories & China Guides | Morrow China Travel", "China travel guides, planning ideas and destination stories for private bespoke journeys."],
   "/b2b": ["China DMC for B2B Partners | Morrow China Travel", "White-label private China DMC support for advisors, agencies and travel designers."],
   "/about": ["About Morrow China Travel", "Meet the China-based inbound travel specialist behind Morrow China Travel."],
@@ -530,66 +517,6 @@ function renderTripDetail(trip) {
   `;
 }
 
-function renderDestinations() {
-  const groups = [...new Set(destinations.map(destination => destination.group))];
-  return `
-    <section class="page-hero">
-      <div class="container">
-        <p class="eyebrow">Destinations</p>
-        <h1>China is not one trip. It is a route design question.</h1>
-        <p class="lead">Explore the regions we most often weave into private journeys, from imperial capitals to mountain landscapes and frontier culture.</p>
-      </div>
-    </section>
-    ${destinationBuilder()}
-    <section class="section">
-      <div class="container">
-        ${groups.map(group => `
-          <div class="destination-group">
-            <p class="eyebrow">${group}</p>
-            <div class="destination-row">
-              ${destinations.filter(destination => destination.group === group).map(destination => `
-                <article class="destination-card">
-                  <img src="${destination.image}" alt="${destination.name} scenery" loading="lazy">
-                  <div>
-                    <h3>${destination.name}</h3>
-                    <p>${destination.text}</p>
-                    <div class="facts"><span>${destination.bestFor}</span><span>${destination.months}</span></div>
-                  </div>
-                </article>`).join("")}
-            </div>
-          </div>`).join("")}
-      </div>
-    </section>`;
-}
-
-function renderTravelStyles() {
-  return `
-    <section class="page-hero page-hero--image" style="--hero-image:url('${images.tea}')">
-      <div class="container">
-        <p class="eyebrow">Travel Styles</p>
-        <h1>Begin with how you want to feel while traveling.</h1>
-        <p class="lead">Family rhythm, luxury polish, cultural depth, accessibility needs and advisor support all change how a China itinerary should be designed.</p>
-      </div>
-    </section>
-    <section class="section">
-      <div class="container">
-        ${styleExplorer()}
-      </div>
-    </section>
-    <section class="section section--ivory">
-      <div class="container style-grid">
-        ${travelStyles.map(style => `
-          <article class="style-card">
-            <p class="eyebrow">${style.ideal}</p>
-            <h3>${style.title}</h3>
-            <p>${style.text}</p>
-            <div class="facts">${style.routes.map(route => `<span>${route}</span>`).join("")}</div>
-            <a class="link-arrow" href="${whatsappLink(`Hi, I would like to plan a ${style.title.toLowerCase()} in China.`)}" target="_blank" rel="noopener">Plan This Style</a>
-          </article>`).join("")}
-      </div>
-    </section>`;
-}
-
 function renderBlog() {
   return `
     <section class="page-hero">
@@ -761,8 +688,6 @@ function renderNotFound() {
 const routes = {
   "/": renderHome,
   "/trips": renderTrips,
-  "/destinations": renderDestinations,
-  "/travel-styles": renderTravelStyles,
   "/blog": renderBlog,
   "/b2b": renderB2B,
   "/about": renderAbout,

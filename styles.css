@@ -1,12 +1,12 @@
 :root {
   --ink: #17211d;
-  --muted: #627069;
-  --paper: #fcfbf7;
-  --ivory: #f0eee6;
-  --line: #d7ddd4;
-  --gold: #c59a4a;
+  --muted: #53635c;
+  --paper: #fbfaf6;
+  --ivory: #efece3;
+  --line: #d4d9d0;
+  --gold: #c49a4a;
   --jade: #176b5c;
-  --deep: #102c28;
+  --deep: #0e302b;
   --mist: #e4efeb;
   --soft: #f6f8f3;
   --white: #ffffff;
@@ -152,7 +152,7 @@ button, input, textarea, select { font: inherit; }
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
 }
-.section { padding: clamp(4.5rem, 8vw, 8rem) 0; }
+.section { padding: clamp(3.75rem, 6vw, 6rem) 0; }
 .section--ivory { background: var(--ivory); }
 .section--soft { background: var(--soft); }
 .section--deep, .section--dark {
@@ -163,16 +163,18 @@ button, input, textarea, select { font: inherit; }
 .section--deep p, .section--dark p { color: rgba(255,255,255,.84); }
 .section-head {
   display: grid;
-  grid-template-columns: minmax(0, .9fr) minmax(320px, .7fr);
-  gap: clamp(1.5rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 1fr);
+  gap: .65rem;
   align-items: start;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
+  max-width: 850px;
+  margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
   text-align: left;
 }
-.section-head .lead { margin: 0; }
+.section-head .eyebrow { margin-bottom: .15rem; }
+.section-head .lead { margin: .25rem 0 0; max-width: 680px; }
 .section-head h2 {
   max-width: none;
-  font-size: clamp(1.7rem, 2.35vw, 2.5rem);
+  font-size: clamp(1.7rem, 2.7vw, 2.65rem);
   text-align: left;
 }
 .eyebrow {
@@ -190,8 +192,8 @@ h1, h2, h3 {
   line-height: 1.02;
   white-space: nowrap;
 }
-h1 { max-width: 100%; font-size: clamp(2.2rem, 3.8vw, 3.85rem); }
-h2 { max-width: 100%; font-size: clamp(1.8rem, 2.8vw, 3rem); }
+h1 { max-width: 100%; font-size: clamp(2.15rem, 3.4vw, 3.55rem); }
+h2 { max-width: 100%; font-size: clamp(1.8rem, 2.7vw, 2.85rem); }
 h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 .hero h1, .detail-hero h1, .page-hero h1 { white-space: normal; }
 .choice-card h3, .journey-card h3, .region-card h3, .difference-item h3 { white-space: normal; }
@@ -210,10 +212,10 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
   overflow: hidden;
 }
 .hero {
-  min-height: calc(100svh - 76px);
+  min-height: min(720px, calc(100svh - 76px));
   display: grid;
   align-items: end;
-  padding: clamp(5rem, 8vw, 8rem) 0;
+  padding: clamp(4.5rem, 7vw, 7rem) 0;
 }
 .hero::before, .detail-hero::before, .page-hero--image::before {
   content: "";
@@ -274,6 +276,8 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
   line-height: 1.05;
 }
 .hero-panel p { color: rgba(255,255,255,.76); }
+.hero-panel .link-arrow { color: var(--white); margin-top: .4rem; }
+.hero-panel .link-arrow:hover { color: var(--gold); }
 
 .page-hero {
   padding: clamp(5rem, 10vw, 8.5rem) 0 clamp(3rem, 6vw, 5rem);
@@ -324,15 +328,16 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 .choice-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
+  gap: 12px;
   border: 1px solid var(--line);
-  background: var(--line);
+  background: transparent;
 }
 .choice-card {
   display: grid;
   grid-template-rows: auto 1fr;
   min-width: 0;
   background: var(--paper);
+  border: 1px solid var(--line);
   overflow: hidden;
 }
 .choice-card img {
@@ -354,14 +359,14 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 
 .section-link {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding-top: 1.35rem;
 }
 
 .difference-layout {
   display: grid;
   grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
-  gap: clamp(3rem, 8vw, 8rem);
+  gap: clamp(2.5rem, 6vw, 6rem);
 }
 .difference-intro .lead { max-width: 520px; }
 .difference-list { border-top: 1px solid var(--line); }
@@ -384,15 +389,16 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 .region-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  border: 1px solid var(--line);
-  background: var(--line);
+  gap: 12px;
+  border: 0;
+  background: transparent;
 }
 .region-card {
   display: grid;
   grid-template-rows: auto 1fr;
   min-width: 0;
   background: var(--paper);
+  border: 1px solid var(--line);
   overflow: hidden;
 }
 .region-card img {
@@ -411,26 +417,27 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 .feature-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr);
-  gap: 1px;
-  background: var(--line);
+  gap: 12px;
+  background: transparent;
   border: 1px solid var(--line);
 }
 .feature-layout__side {
   display: grid;
-  gap: 1px;
+  gap: 12px;
 }
 .journey-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
+  gap: 12px;
+  background: transparent;
+  border: 0;
 }
 .journey-card {
   display: grid;
   grid-template-rows: auto 1fr;
   min-width: 0;
   background: var(--paper);
+  border: 1px solid var(--line);
 }
 .journey-card--feature { grid-row: span 3; }
 .journey-card__image { overflow: hidden; }
@@ -567,9 +574,9 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 .steps, .quote-grid, .journal-grid, .style-grid, .service-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  border: 1px solid var(--line);
-  background: var(--line);
+  gap: 12px;
+  border: 0;
+  background: transparent;
 }
 .quote-grid, .journal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .service-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -578,6 +585,7 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
   margin: 0;
   min-width: 0;
   background: var(--paper);
+  border: 1px solid var(--line);
   padding: clamp(1.25rem, 2.5vw, 1.8rem);
 }
 .step p, .quote figcaption, .journal-card p, .style-card p {
@@ -586,9 +594,10 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 }
 .section--deep .step p { color: rgba(255,255,255,.84); }
 .section--deep .step {
-  background: rgba(255,255,255,.06);
+  background: #17483f;
   border-color: rgba(255,255,255,.12);
 }
+.section--deep .step h3 { color: var(--white); }
 .step strong {
   display: inline-grid;
   place-items: center;

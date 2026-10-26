@@ -10,7 +10,7 @@ const images = {
   greatWall: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1800&auto=format&fit=crop",
   zhangjiajie: "https://images.unsplash.com/photo-1584872589930-e99fe5bf4408?q=80&w=1800&auto=format&fit=crop",
   yunnan: "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?q=80&w=1800&auto=format&fit=crop",
-  tibet: "https://images.unsplash.com/photo-1624720114708-0cbd6ee41b93?q=80&w=1800&auto=format&fit=crop",
+  tibet: "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1800&auto=format&fit=crop",
   guilin: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1800&auto=format&fit=crop",
   shanghai: "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?q=80&w=1800&auto=format&fit=crop",
   silkRoad: "https://images.unsplash.com/photo-1567337710282-00832b415979?q=80&w=1800&auto=format&fit=crop",
@@ -221,7 +221,7 @@ function setMeta(path) {
 
 function sectionHeader(eyebrow, title, lead = "") {
   return `
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="eyebrow">${eyebrow}</p>
       <h2>${title}</h2>
       ${lead ? `<p class="lead">${lead}</p>` : ""}
@@ -257,8 +257,8 @@ function renderHero() {
     <section class="hero" style="--hero-image:url('${images.zhangjiajie}')">
       <div class="container hero__grid">
         <div class="hero__content">
-          <p class="eyebrow">Private China Journeys</p>
-          <h1>China, designed around how you travel.</h1>
+          <p class="eyebrow">Morrow China Travel · Private journeys</p>
+          <h1>See China in your own rhythm.</h1>
           <p class="lead">Private journeys shaped by local expertise, thoughtful pacing and the freedom to experience China beyond the expected.</p>
           <div class="hero__actions">
             <a class="button button--light" href="/contact" data-link>Start Planning</a>
@@ -266,9 +266,10 @@ function renderHero() {
           </div>
         </div>
         <aside class="hero-panel" aria-label="Morrow China highlights">
-          <span>China-based specialists</span>
-          <strong>Private travel, carefully held.</strong>
-          <p>Licensed inbound expertise, vetted guides, private transport and on-trip support, coordinated by one calm planning voice.</p>
+          <span>Travel with context</span>
+          <strong>Classic places. Personal pace.</strong>
+          <p>China-based planning, private guides and calm support from the first idea to the final departure.</p>
+          <a class="link-arrow" href="/about" data-link>Why Morrow</a>
         </aside>
       </div>
     </section>`;

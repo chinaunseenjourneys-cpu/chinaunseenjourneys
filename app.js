@@ -196,14 +196,14 @@ const posts = [
 ];
 
 const pageMeta = {
-  "/": ["Private Custom China Tours | China Unseen Journeys", "Private bespoke China journeys designed with China-based expertise, refined pacing and private guide support."],
-  "/trips": ["Private China Tours & Journeys | China Unseen Journeys", "Browse private bespoke China itineraries by region, style and travel pace."],
-  "/destinations": ["China Travel Destinations | China Unseen Journeys", "Explore private travel destinations across China and see how regions pair together."],
-  "/travel-styles": ["Travel Styles | China Unseen Journeys", "Family, senior, Muslim-friendly, women-only, luxury and tailor-made China travel styles."],
-  "/blog": ["Travel Stories & China Guides | China Unseen Journeys", "China travel guides, planning ideas and destination stories for private bespoke journeys."],
-  "/b2b": ["China DMC for B2B Partners | China Unseen Journeys", "White-label private China DMC support for advisors, agencies and travel designers."],
-  "/about": ["About China Unseen Journeys", "Meet the China-based inbound travel specialist behind China Unseen Journeys."],
-  "/contact": ["Contact China Unseen Journeys", "Plan a private bespoke China journey by WhatsApp or email."]
+  "/": ["Private Custom China Tours | Morrow China Travel", "Private bespoke China journeys designed with China-based expertise, refined pacing and private guide support."],
+  "/trips": ["Private China Tours & Journeys | Morrow China Travel", "Browse private bespoke China itineraries by region, style and travel pace."],
+  "/destinations": ["China Travel Destinations | Morrow China Travel", "Explore private travel destinations across China and see how regions pair together."],
+  "/travel-styles": ["Travel Styles | Morrow China Travel", "Family, senior, Muslim-friendly, women-only, luxury and tailor-made China travel styles."],
+  "/blog": ["Travel Stories & China Guides | Morrow China Travel", "China travel guides, planning ideas and destination stories for private bespoke journeys."],
+  "/b2b": ["China DMC for B2B Partners | Morrow China Travel", "White-label private China DMC support for advisors, agencies and travel designers."],
+  "/about": ["About Morrow China Travel", "Meet the China-based inbound travel specialist behind Morrow China Travel."],
+  "/contact": ["Contact Morrow China Travel", "Plan a private bespoke China journey by WhatsApp or email."]
 };
 
 function escapeHtml(value) {
@@ -222,7 +222,7 @@ function setMeta(path) {
   const trip = trips.find(item => `/trips/${item.slug}` === path);
   const post = posts.find(item => `/blog/${item.slug}` === path);
   const dynamicMeta = trip
-    ? [`${trip.title} | Private China Journey`, `${trip.summary} Private bespoke China itinerary by China Unseen Journeys.`]
+    ? [`${trip.title} | Private China Journey`, `${trip.summary} Private bespoke China itinerary by Morrow China Travel.`]
     : post
       ? [`${post.title} | China Travel Guide`, post.excerpt]
       : null;
@@ -278,7 +278,7 @@ function renderHero() {
             <a class="button button--ghost" href="/contact" data-link>Start Planning</a>
           </div>
         </div>
-        <aside class="hero-panel" aria-label="China Unseen highlights">
+        <aside class="hero-panel" aria-label="Morrow China highlights">
           <span>Licensed inbound operator</span>
           <strong>Private-only travel across China</strong>
           <p>Route design, vetted guides, private transport, permits and on-trip support handled with one calm planning voice.</p>
@@ -301,7 +301,7 @@ function renderHome() {
     <section class="section">
       <div class="container editorial">
         <div>
-          <p class="eyebrow">The China Unseen Approach</p>
+          <p class="eyebrow">The Morrow Approach</p>
           <h2>Less checklist, more carefully held discovery.</h2>
         </div>
         <div class="editorial__copy">
@@ -657,7 +657,7 @@ function renderAbout() {
       <div class="container">
         <p class="eyebrow">About Us</p>
         <h1>China, planned with care and local fluency.</h1>
-        <p class="lead">China Unseen Journeys is a China-based inbound travel specialist focused on private, bespoke travel for curious travelers and trusted partners.</p>
+        <p class="lead">Morrow China Travel is a China-based inbound travel specialist focused on private, bespoke travel for curious travelers and trusted partners.</p>
       </div>
     </section>
     <section class="section">

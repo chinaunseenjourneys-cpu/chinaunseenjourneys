@@ -167,7 +167,10 @@ button, input, textarea, select { font: inherit; }
   margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 .section-head .lead { margin: 0; }
-.section-head h2 { max-width: 650px; }
+.section-head h2 {
+  max-width: none;
+  font-size: clamp(1.7rem, 2.35vw, 2.5rem);
+}
 .eyebrow {
   margin: 0 0 1rem;
   color: var(--gold);
@@ -181,17 +184,17 @@ h1, h2, h3 {
   font-family: var(--font-serif);
   font-weight: 500;
   line-height: 1.02;
-  text-wrap: balance;
+  white-space: nowrap;
 }
-h1 { max-width: 780px; font-size: clamp(3.2rem, 7vw, 6.6rem); }
-h2 { max-width: 720px; font-size: clamp(2.35rem, 4.4vw, 4.35rem); }
-h3 { font-size: clamp(1.45rem, 2.35vw, 2rem); }
+h1 { max-width: 100%; font-size: clamp(2.2rem, 3.8vw, 3.85rem); }
+h2 { max-width: 100%; font-size: clamp(1.8rem, 2.8vw, 3rem); }
+h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 .lead {
   max-width: 760px;
   margin: 1.3rem 0 0;
   color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: .96rem;
+  line-height: 1.62;
 }
 
 .hero, .detail-hero, .page-hero--image {
@@ -255,7 +258,7 @@ h3 { font-size: clamp(1.45rem, 2.35vw, 2rem); }
 .hero-panel strong {
   display: block;
   font-family: var(--font-serif);
-  font-size: 1.75rem;
+  font-size: 1.48rem;
   line-height: 1.05;
 }
 .hero-panel p { color: rgba(255,255,255,.76); }
@@ -328,7 +331,7 @@ h3 { font-size: clamp(1.45rem, 2.35vw, 2rem); }
 }
 .choice-card:hover img { transform: scale(1.035); }
 .choice-card__body { padding: 1.35rem; }
-.choice-card h3 { font-size: clamp(1.45rem, 2.5vw, 1.9rem); }
+.choice-card h3 { font-size: clamp(1rem, 1.18vw, 1.2rem); }
 .choice-card p {
   max-width: 30ch;
   color: var(--muted);
@@ -362,7 +365,7 @@ h3 { font-size: clamp(1.45rem, 2.35vw, 2rem); }
   font-weight: 700;
   letter-spacing: .14em;
 }
-.difference-item h3 { font-size: clamp(1.45rem, 2.4vw, 2rem); }
+.difference-item h3 { font-size: clamp(1rem, 1.2vw, 1.2rem); }
 .difference-item p { max-width: 52ch; margin-bottom: 0; color: var(--muted); line-height: 1.55; }
 
 .region-grid {
@@ -387,7 +390,7 @@ h3 { font-size: clamp(1.45rem, 2.35vw, 2rem); }
 }
 .region-card:hover img { transform: scale(1.035); }
 .region-card > div { padding: 1.25rem; }
-.region-card h3 { font-size: clamp(1.35rem, 2.3vw, 1.85rem); }
+.region-card h3 { font-size: clamp(.98rem, 1.15vw, 1.16rem); }
 .region-card p:not(.eyebrow) { max-width: 26ch; color: var(--muted); line-height: 1.55; }
 .region-card .eyebrow { margin-bottom: .55rem; }
 .region-card .link-arrow { margin-top: .25rem; }
@@ -427,7 +430,7 @@ h3 { font-size: clamp(1.45rem, 2.35vw, 2rem); }
 .journey-card:hover img { transform: scale(1.035); }
 .journey-card--feature img { aspect-ratio: 4 / 5; height: 100%; }
 .journey-card__body { padding: clamp(1.25rem, 2.5vw, 2rem); }
-.journey-card h3 { margin-bottom: .7rem; }
+.journey-card h3 { margin-bottom: .7rem; font-size: clamp(1rem, 1.18vw, 1.2rem); }
 .journey-card p { max-width: 48ch; color: var(--muted); line-height: 1.55; }
 
 .facts {
@@ -581,7 +584,7 @@ h3 { font-size: clamp(1.45rem, 2.35vw, 2rem); }
 .quote blockquote {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   line-height: 1.2;
 }
 .quote figcaption {
@@ -900,8 +903,9 @@ dd { margin: .25rem 0 0; color: var(--muted); }
 @media (max-width: 560px) {
   .container { width: min(100% - 28px, 1180px); }
   .brand { font-size: .95rem; letter-spacing: .12em; }
-  h1 { font-size: 3.25rem; }
-  h2 { font-size: 2.35rem; }
+  h1 { font-size: 2.45rem; white-space: normal; }
+  h2 { font-size: 2rem; white-space: normal; }
+  h3 { white-space: normal; }
   .hero { min-height: 720px; }
   .detail-hero { min-height: 640px; }
   .button { width: 100%; }

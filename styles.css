@@ -9,6 +9,7 @@
   --deep: #102c28;
   --mist: #e4efeb;
   --soft: #f6f8f3;
+  --white: #ffffff;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Lato", Arial, sans-serif;
 }
@@ -159,17 +160,20 @@ button, input, textarea, select { font: inherit; }
   color: white;
 }
 .section--deep .lead, .section--dark .lead { color: rgba(255,255,255,.72); }
+.section--deep p, .section--dark p { color: rgba(255,255,255,.84); }
 .section-head {
   display: grid;
   grid-template-columns: minmax(0, .9fr) minmax(320px, .7fr);
   gap: clamp(1.5rem, 4vw, 4rem);
-  align-items: end;
+  align-items: start;
   margin-bottom: clamp(2rem, 4vw, 3rem);
+  text-align: left;
 }
 .section-head .lead { margin: 0; }
 .section-head h2 {
   max-width: none;
   font-size: clamp(1.7rem, 2.35vw, 2.5rem);
+  text-align: left;
 }
 .eyebrow {
   margin: 0 0 1rem;
@@ -189,10 +193,12 @@ h1, h2, h3 {
 h1 { max-width: 100%; font-size: clamp(2.2rem, 3.8vw, 3.85rem); }
 h2 { max-width: 100%; font-size: clamp(1.8rem, 2.8vw, 3rem); }
 h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
+.hero h1, .detail-hero h1, .page-hero h1 { white-space: normal; }
+.choice-card h3, .journey-card h3, .region-card h3, .difference-item h3 { white-space: normal; }
 .lead {
   max-width: 760px;
   margin: 1.3rem 0 0;
-  color: var(--muted);
+  color: #43534d;
   font-size: .96rem;
   line-height: 1.62;
 }
@@ -234,6 +240,12 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
   align-items: end;
 }
 .hero__content { max-width: 850px; }
+.hero__content h1,
+.hero__content .lead,
+.hero__content .eyebrow { text-align: left; }
+.hero__content h1,
+.hero__content .lead { color: var(--white); }
+.hero__content .lead { max-width: 660px; text-shadow: 0 1px 10px rgba(0,0,0,.18); }
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -268,7 +280,7 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
   background: var(--deep);
   color: white;
 }
-.page-hero .lead { color: rgba(255,255,255,.72); }
+.page-hero .lead { color: rgba(255,255,255,.88); }
 .page-hero--image { background: var(--deep); }
 .detail-hero {
   min-height: 680px;
@@ -334,8 +346,9 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 .choice-card h3 { font-size: clamp(1rem, 1.18vw, 1.2rem); }
 .choice-card p {
   max-width: 30ch;
-  color: var(--muted);
+  color: #43534d;
   line-height: 1.55;
+  text-align: left;
 }
 .choice-card .link-arrow { margin-top: .4rem; }
 
@@ -366,7 +379,7 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
   letter-spacing: .14em;
 }
 .difference-item h3 { font-size: clamp(1rem, 1.2vw, 1.2rem); }
-.difference-item p { max-width: 52ch; margin-bottom: 0; color: var(--muted); line-height: 1.55; }
+.difference-item p { max-width: 52ch; margin-bottom: 0; color: #43534d; line-height: 1.55; text-align: left; }
 
 .region-grid {
   display: grid;
@@ -391,7 +404,7 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 .region-card:hover img { transform: scale(1.035); }
 .region-card > div { padding: 1.25rem; }
 .region-card h3 { font-size: clamp(.98rem, 1.15vw, 1.16rem); }
-.region-card p:not(.eyebrow) { max-width: 26ch; color: var(--muted); line-height: 1.55; }
+.region-card p:not(.eyebrow) { max-width: 26ch; color: #43534d; line-height: 1.55; text-align: left; }
 .region-card .eyebrow { margin-bottom: .55rem; }
 .region-card .link-arrow { margin-top: .25rem; }
 
@@ -431,7 +444,7 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
 .journey-card--feature img { aspect-ratio: 4 / 5; height: 100%; }
 .journey-card__body { padding: clamp(1.25rem, 2.5vw, 2rem); }
 .journey-card h3 { margin-bottom: .7rem; font-size: clamp(1rem, 1.18vw, 1.2rem); }
-.journey-card p { max-width: 48ch; color: var(--muted); line-height: 1.55; }
+.journey-card p { max-width: 48ch; color: #43534d; line-height: 1.55; text-align: left; }
 
 .facts {
   display: flex;
@@ -567,7 +580,11 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
   background: var(--paper);
   padding: clamp(1.25rem, 2.5vw, 1.8rem);
 }
-.step p, .quote figcaption, .journal-card p, .style-card p { line-height: 1.55; }
+.step p, .quote figcaption, .journal-card p, .style-card p {
+  color: #43534d;
+  line-height: 1.55;
+}
+.section--deep .step p { color: rgba(255,255,255,.84); }
 .section--deep .step {
   background: rgba(255,255,255,.06);
   border-color: rgba(255,255,255,.12);
@@ -586,6 +603,7 @@ h3 { font-size: clamp(1.12rem, 1.55vw, 1.42rem); }
   font-family: var(--font-serif);
   font-size: 1.2rem;
   line-height: 1.2;
+  text-align: left;
 }
 .quote figcaption {
   margin-top: 1.25rem;

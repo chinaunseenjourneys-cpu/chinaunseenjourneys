@@ -259,16 +259,16 @@ function renderHero() {
         <div class="hero__content">
           <p class="eyebrow">Private China Journeys</p>
           <h1>China, designed around how you travel.</h1>
-          <p class="lead">Bespoke private journeys shaped by China-based specialists for travelers who value depth, comfort and graceful logistics.</p>
+          <p class="lead">Private journeys shaped by local expertise, thoughtful pacing and the freedom to experience China beyond the expected.</p>
           <div class="hero__actions">
-            <a class="button button--light" href="/trips" data-link>Explore Journeys</a>
-            <a class="button button--ghost" href="/contact" data-link>Start Planning</a>
+            <a class="button button--light" href="/contact" data-link>Start Planning</a>
+            <a class="button button--ghost" href="/trips" data-link>Explore Journeys</a>
           </div>
         </div>
         <aside class="hero-panel" aria-label="Morrow China highlights">
-          <span>Licensed inbound operator</span>
-          <strong>Private-only travel across China</strong>
-          <p>Route design, vetted guides, private transport, permits and on-trip support handled with one calm planning voice.</p>
+          <span>China-based specialists</span>
+          <strong>Private travel, carefully held.</strong>
+          <p>Licensed inbound expertise, vetted guides, private transport and on-trip support, coordinated by one calm planning voice.</p>
         </aside>
       </div>
     </section>`;
@@ -279,47 +279,106 @@ function renderHome() {
     ${renderHero()}
     <section class="signature-strip" aria-label="Travel strengths">
       <div class="container signature-strip__inner">
-        <span>China-based expertise</span>
-        <span>Private guide teams</span>
+        <span>China-based specialists</span>
+        <span>Private guides and drivers</span>
         <span>Tailor-made pacing</span>
-        <span>B2B-ready ground support</span>
+        <span>Support before and during travel</span>
       </div>
     </section>
-    <section class="section">
-      <div class="container editorial">
-        <div>
-          <p class="eyebrow">The Morrow Approach</p>
-          <h2>Less checklist, more carefully held discovery.</h2>
-        </div>
-        <div class="editorial__copy">
-          <p>China is vast, seasonal and deeply layered. We design each private journey as a route with rhythm: the right hotel base, the right guide, the right transport choice, and enough space for the unscripted moments that make travel feel alive.</p>
-          <p>Whether you are a family, a couple, a senior traveler, a culture lover or a travel advisor, the work is the same: remove friction without flattening the experience.</p>
-        </div>
-      </div>
-    </section>
+    ${journeySelector()}
     <section class="section section--ivory">
       <div class="container">
-        ${sectionHeader("Featured Journeys", "Private routes with a sense of place.", "Use these as polished starting points. Every journey can be redesigned around dates, interests, hotel style and travel pace.")}
+        ${sectionHeader("Journeys to begin with", "Thoughtful routes, redesigned around you.", "Use these as starting points. We refine every journey around your dates, interests, hotel style and pace.")}
         <div class="feature-layout">
-          ${tripCard(trips[0], true)}
+          ${tripCard(trips[1], true)}
           <div class="feature-layout__side">
-            ${trips.slice(1, 4).map(trip => tripCard(trip)).join("")}
+            ${[trips[0], trips[2]].map(trip => tripCard(trip)).join("")}
           </div>
         </div>
+        <div class="section-link"><a class="link-arrow" href="/trips" data-link>View all journeys</a></div>
       </div>
     </section>
-    <section class="section">
-      <div class="container">
-        ${sectionHeader("Start With Your Style", "Choose the travel rhythm that feels like you.")}
-        ${styleExplorer()}
-      </div>
-    </section>
-    ${processSection()}
-    ${destinationBuilder()}
+    ${differenceSection()}
+    ${destinationShowcase()}
     ${testimonialSection()}
-    ${journalPreview()}
+    ${processSection()}
+    ${journalPreview(2)}
     ${contactSection("Begin with a conversation.", "Tell us the kind of China you want to feel. We will shape the route, pace and support around you.")}
   `;
+}
+
+function journeySelector() {
+  const choices = [
+    ["First time in China", "A considered introduction to Beijing, Xi'an and the landscapes beyond.", "/trips?cat=culture", images.greatWall],
+    ["Family journey", "Comfortable pacing, hands-on experiences and room for every generation.", "/trips?cat=family", images.guilin],
+    ["Luxury escape", "Design-led hotels, private access and polished logistics from arrival to departure.", "/trips?cat=luxury", images.shanghai],
+    ["Nature and culture", "Mountain light, ancient towns and a slower sense of place.", "/trips?cat=nature", images.zhangjiajie]
+  ];
+  return `
+    <section class="section section--soft">
+      <div class="container">
+        ${sectionHeader("Find your starting point", "What kind of China journey are you imagining?", "Choose the feeling that comes closest. We will shape the details from there.")}
+        <div class="choice-grid">
+          ${choices.map(([title, text, href, image]) => `
+            <a class="choice-card" href="${href}" data-link>
+              <img src="${image}" alt="${title}" loading="lazy">
+              <div class="choice-card__body">
+                <h3>${title}</h3>
+                <p>${text}</p>
+                <span class="link-arrow">Explore this style</span>
+              </div>
+            </a>`).join("")}
+        </div>
+      </div>
+    </section>`;
+}
+
+function differenceSection() {
+  const differences = [
+    ["Local knowledge, thoughtfully applied", "Better hotel bases, quieter timing and seasonal routing that make the journey feel effortless."],
+    ["Private travel without the performance", "A private guide and vehicle when they add value, with enough space for the day to feel natural."],
+    ["One calm planning voice", "Route design, hotels, permits, drivers and on-trip support coordinated by one China-based team."]
+  ];
+  return `
+    <section class="section">
+      <div class="container difference-layout">
+        <div class="difference-intro">
+          <p class="eyebrow">The Morrow difference</p>
+          <h2>The details change the feeling of a journey.</h2>
+          <p class="lead">China is vast, seasonal and deeply layered. Our job is to remove friction without flattening the experience.</p>
+          <a class="link-arrow" href="/about" data-link>Meet Morrow China Travel</a>
+        </div>
+        <div class="difference-list">
+          ${differences.map(([title, text], index) => `
+            <article class="difference-item">
+              <span>0${index + 1}</span>
+              <div><h3>${title}</h3><p>${text}</p></div>
+            </article>`).join("")}
+        </div>
+      </div>
+    </section>`;
+}
+
+function destinationShowcase() {
+  const regions = [
+    ["Imperial China", "Beijing · Xi'an", "The icons, given time and human context.", images.greatWall, "/trips?cat=culture"],
+    ["Mountains and rivers", "Zhangjiajie · Guilin", "Dramatic landscapes with a gentler rhythm.", images.zhangjiajie, "/trips?cat=nature"],
+    ["Ancient towns and tea routes", "Yunnan", "Village life, mountain light and slow discovery.", images.yunnan, "/trips?cat=culture"],
+    ["Plateau and sacred landscapes", "Tibet", "A carefully paced journey into rare atmosphere.", images.tibet, "/trips?cat=spiritual"]
+  ];
+  return `
+    <section class="section section--ivory">
+      <div class="container">
+        ${sectionHeader("Where China takes you", "Start with a region. Leave room for discovery.", "From classic capitals to high plateaus, we connect the places that make sense for your time and travel style.")}
+        <div class="region-grid">
+          ${regions.map(([title, places, text, image, href]) => `
+            <a class="region-card" href="${href}" data-link>
+              <img src="${image}" alt="${title}" loading="lazy">
+              <div><p class="eyebrow">${places}</p><h3>${title}</h3><p>${text}</p><span class="link-arrow">Explore journeys</span></div>
+            </a>`).join("")}
+        </div>
+      </div>
+    </section>`;
 }
 
 function processSection() {
@@ -392,14 +451,14 @@ function destinationBuilder() {
 
 function testimonialSection() {
   const quotes = [
-    ["The route felt personal, not copied from a brochure. We saw the famous places, but the quiet moments made it memorable.", "Private family journey"],
-    ["Our guide adjusted each day around weather, crowds and energy. That flexibility changed the whole experience.", "Couple itinerary"],
-    ["As a travel advisor, I need clear communication and reliable ground handling. The China logistics were handled calmly.", "B2B partner"]
+    ["Our family had Beijing, Xi'an and Guilin in mind, but the route was adjusted around our children's energy. Every transfer felt considered.", "Family journey · Beijing, Xi'an and Guilin"],
+    ["Our guide changed each day around weather, crowds and our walking pace. That flexibility changed the whole experience.", "Couple journey · Zhangjiajie and Shanghai"],
+    ["The communication was clear from the first brief, and the ground handling stayed calm throughout the trip.", "Travel advisor · Private China program"]
   ];
   return `
     <section class="section">
       <div class="container">
-        ${sectionHeader("What Travelers Value", "The difference is in the pacing, context and care.")}
+        ${sectionHeader("What travelers value", "A private journey should feel personal, not packaged.", "The strongest proof is not a promise. It is the feeling of being understood before you arrive.")}
         <div class="quote-grid">
           ${quotes.map(([quote, source]) => `<figure class="quote"><blockquote>${quote}</blockquote><figcaption>${source}</figcaption></figure>`).join("")}
         </div>
@@ -407,14 +466,15 @@ function testimonialSection() {
     </section>`;
 }
 
-function journalPreview() {
+function journalPreview(limit = posts.length) {
   return `
     <section class="section section--ivory">
       <div class="container">
-        ${sectionHeader("Travel Notes", "Useful thinking before you plan.", "Short guides for choosing regions, avoiding common mistakes and understanding private travel in China.")}
+        ${sectionHeader("Before you go", "Useful thinking before you plan.", "Practical guidance for choosing regions, pacing the journey and understanding private travel in China.")}
         <div class="journal-grid">
-          ${posts.map(post => `<article class="journal-card"><p class="eyebrow">${post.date} · ${post.readTime}</p><h3><a href="/blog/${post.slug}" data-link>${post.title}</a></h3><p>${post.excerpt}</p><a class="link-arrow" href="/blog/${post.slug}" data-link>Read Guide</a></article>`).join("")}
+          ${posts.slice(0, limit).map(post => `<article class="journal-card"><p class="eyebrow">${post.date} · ${post.readTime}</p><h3><a href="/blog/${post.slug}" data-link>${post.title}</a></h3><p>${post.excerpt}</p><a class="link-arrow" href="/blog/${post.slug}" data-link>Read Guide</a></article>`).join("")}
         </div>
+        <div class="section-link"><a class="link-arrow" href="/blog" data-link>Read all travel notes</a></div>
       </div>
     </section>`;
 }

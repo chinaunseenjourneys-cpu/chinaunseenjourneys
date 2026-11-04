@@ -185,12 +185,12 @@ const posts = [
 ];
 
 const pageMeta = {
-  "/": ["Private Custom China Tours | Morrow China Travel", "Private bespoke China journeys designed with China-based expertise, refined pacing and private guide support."],
-  "/trips": ["Private China Tours & Journeys | Morrow China Travel", "Browse private bespoke China itineraries by region, style and travel pace."],
-  "/blog": ["Travel Stories & China Guides | Morrow China Travel", "China travel guides, planning ideas and destination stories for private bespoke journeys."],
-  "/b2b": ["China DMC for B2B Partners | Morrow China Travel", "White-label private China DMC support for advisors, agencies and travel designers."],
-  "/about": ["About Morrow China Travel", "Meet the China-based inbound travel specialist behind Morrow China Travel."],
-  "/contact": ["Contact Morrow China Travel", "Plan a private bespoke China journey by WhatsApp or email."]
+  "/": ["Private China Tours, Designed Around You | Morrow Travel", "Morrow Travel is a China-based travel specialist creating private, tailor-made China journeys with thoughtful routing, local guides and on-trip support."],
+  "/trips": ["Private China Tours & Itineraries | Morrow Travel", "Explore private China itineraries for culture, landscapes, family travel and luxury. Every route is tailored to your dates, pace and interests."],
+  "/blog": ["China Travel Guides & Planning Advice | Morrow Travel", "Practical China travel guides on choosing regions, planning a first trip and exploring Zhangjiajie beyond the main viewpoints."],
+  "/b2b": ["China DMC & Ground Services for Travel Advisors | Morrow Travel", "Morrow Travel provides private China itinerary design, guides, transport coordination, permit support and on-trip assistance for travel professionals."],
+  "/about": ["About Morrow Travel | China-Based Travel Specialist", "Learn how Morrow Travel plans private China journeys through local knowledge, thoughtful pacing and coordinated on-trip support."],
+  "/contact": ["Plan a Private China Journey | Contact Morrow Travel", "Share your dates, interests and travel style with Morrow Travel to start planning a private, tailor-made journey across China."]
 };
 
 function escapeHtml(value) {
@@ -209,14 +209,78 @@ function setMeta(path) {
   const trip = trips.find(item => `/trips/${item.slug}` === path);
   const post = posts.find(item => `/blog/${item.slug}` === path);
   const dynamicMeta = trip
-    ? [`${trip.title} | Private China Journey`, `${trip.summary} Private bespoke China itinerary by Morrow China Travel.`]
+    ? [`${trip.title} | Private China Tour | Morrow Travel`, `${trip.summary} Explore a tailor-made ${trip.days}-day private China journey with Morrow Travel.`]
     : post
-      ? [`${post.title} | China Travel Guide`, post.excerpt]
+      ? [`${post.title} | Morrow Travel`, post.excerpt]
       : null;
   const [title, description] = dynamicMeta || pageMeta[path] || pageMeta["/"];
+  const canonical = `https://www.chinaunseenjourneys.com${path === "/" ? "/" : path}`;
   document.title = title;
   document.querySelector('meta[name="description"]').setAttribute("content", description);
-  document.querySelector('link[rel="canonical"]').setAttribute("href", `https://www.chinaunseenjourneys.com${path === "/" ? "/" : path}`);
+  document.querySelector('link[rel="canonical"]').setAttribute("href", canonical);
+  document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
+  document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+  document.querySelector('meta[property="og:url"]')?.setAttribute("content", canonical);
+  document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", title);
+  document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", description);
+  document.querySelector('meta[property="og:site_name"]')?.setAttribute("content", "Morrow Travel");
+  updateStructuredData(path, trip, post, title, description);
+}
+
+function updateStructuredData(path, trip, post, title, description) {
+  const schemaNode = document.querySelector("script[data-site-schema]");
+  if (!schemaNode) return;
+  const siteUrl = "https://www.chinaunseenjourneys.com";
+  const pageUrl = `${siteUrl}${path === "/" ? "/" : path}`;
+  const organization = {
+    "@type": "TravelAgency",
+    "@id": `${siteUrl}/#organization`,
+    name: "Morrow Travel",
+    url: `${siteUrl}/`,
+    description: "China-based travel specialist designing private, tailor-made journeys across China.",
+    address: { "@type": "PostalAddress", addressLocality: "Shenzhen", addressCountry: "CN" },
+    email: CONTACT.email,
+    telephone: CONTACT.whatsapp,
+    areaServed: { "@type": "Country", name: "China" },
+    sameAs: [CONTACT.instagram, CONTACT.facebook]
+  };
+  const graph = [organization, {
+    "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    url: `${siteUrl}/`,
+    name: "Morrow Travel",
+    publisher: { "@id": `${siteUrl}/#organization` },
+    inLanguage: "en"
+  }, {
+    "@type": post ? "WebPage" : trip ? "WebPage" : path === "/about" ? "AboutPage" : path === "/contact" ? "ContactPage" : path === "/trips" ? "CollectionPage" : path === "/blog" ? "Blog" : "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: title,
+    description,
+    inLanguage: "en",
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    about: { "@id": `${siteUrl}/#organization` }
+  }];
+  if (trip) graph.push({
+    "@type": "TouristTrip",
+    "@id": `${pageUrl}#trip`,
+    name: trip.title,
+    description: trip.summary,
+    touristType: trip.bestFor,
+    itinerary: { "@type": "ItemList", itemListElement: trip.route.map((name, index) => ({ "@type": "ListItem", position: index + 1, name })) },
+    provider: { "@id": `${siteUrl}/#organization` }
+  });
+  if (post) graph.push({
+    "@type": "BlogPosting",
+    "@id": `${pageUrl}#article`,
+    headline: post.title,
+    description: post.excerpt,
+    mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+    publisher: { "@id": `${siteUrl}/#organization` },
+    author: { "@id": `${siteUrl}/#organization` },
+    inLanguage: "en"
+  });
+  schemaNode.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
 }
 
 function sectionHeader(eyebrow, title, lead = "") {
@@ -257,7 +321,7 @@ function renderHero() {
     <section class="hero" style="--hero-image:url('${images.zhangjiajie}')">
       <div class="container hero__grid">
         <div class="hero__content">
-          <p class="eyebrow">Morrow China Travel · Private journeys</p>
+          <p class="eyebrow">Morrow Travel · Private China journeys</p>
           <h1>See China in your own rhythm.</h1>
           <p class="lead">Private journeys shaped by local expertise, thoughtful pacing and the freedom to experience China beyond the expected.</p>
           <div class="hero__actions">
@@ -265,7 +329,7 @@ function renderHero() {
             <a class="button button--ghost" href="/trips" data-link>Explore Journeys</a>
           </div>
         </div>
-        <aside class="hero-panel" aria-label="Morrow China highlights">
+        <aside class="hero-panel" aria-label="Morrow Travel highlights">
           <span>Travel with context</span>
           <strong>Classic places. Personal pace.</strong>
           <p>China-based planning, private guides and calm support from the first idea to the final departure.</p>
@@ -347,7 +411,7 @@ function differenceSection() {
           <p class="eyebrow">The Morrow difference</p>
           <h2>The details change the feeling of a journey.</h2>
           <p class="lead">China is vast, seasonal and deeply layered. Our job is to remove friction without flattening the experience.</p>
-          <a class="link-arrow" href="/about" data-link>Meet Morrow China Travel</a>
+          <a class="link-arrow" href="/about" data-link>Meet Morrow Travel</a>
         </div>
         <div class="difference-list">
           ${differences.map(([title, text], index) => `
@@ -645,7 +709,7 @@ function renderAbout() {
       <div class="container">
         <p class="eyebrow">About Us</p>
         <h1>China, planned with care and local fluency.</h1>
-        <p class="lead">Morrow China Travel is a China-based inbound travel specialist focused on private, bespoke travel for curious travelers and trusted partners.</p>
+        <p class="lead">Morrow Travel is a China-based inbound travel specialist focused on private, tailor-made journeys for curious travelers and trusted partners.</p>
       </div>
     </section>
     <section class="section">

@@ -1,6 +1,9 @@
 {
-  "name": "morrow-china-travel",
+  "name": "morrow-travel",
   "private": true,
   "version": "2.0.0",
-  "description": "Private bespoke China travel website for Morrow China Travel."
+  "description": "Morrow Travel designs private, tailor-made journeys across China.",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  }
 }
